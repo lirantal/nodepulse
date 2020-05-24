@@ -12,10 +12,12 @@
       </content-placeholders>
     </template>
     <template v-else>
-      <highcharts
-        :constructor-type="'ganttChart'"
-        :options="chartOptions"
-      ></highcharts>
+      <ClientOnly>
+        <highcharts
+          :constructor-type="'ganttChart'"
+          :options="chartOptions"
+        ></highcharts>
+      </ClientOnly>
     </template>
   </div>
 </template>
@@ -104,7 +106,6 @@ export default {
         enabled: true,
         selected: 0
       },
-
       plotOptions: {
         series: {
           animation: true,
@@ -147,6 +148,5 @@ export default {
       chartOptions: null
     }
   }
-  // fetchOnServer: false
 }
 </script>
