@@ -1,8 +1,11 @@
-process.env.DEBUG = 'nuxt:*'
-
 export default {
   env: {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN || ''
+  },
+  server: {
+    port: process.env.PORT || 8080,
+    host: '0.0.0.0',
+    timing: false
   },
   debug: true,
   mode: 'universal',

@@ -1,6 +1,6 @@
-# nodejs-live-nuxtjs
+# NodePulse
 
-> Node.js live dashboard
+> NodePulse is a live Node.js dashboard
 
 ## Build Setup
 
@@ -8,7 +8,7 @@
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:8080
 $ yarn dev
 
 # build for production and launch server
@@ -19,4 +19,24 @@ $ yarn start
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Google Cloud Run
+
+### Initialize
+
+Login with glcoud:
+
+```bash
+gcloud auth login
+```
+
+Follow that with ensuring the nodepulse project is set to active:
+
+```
+gcloud config set project nodepulse
+```
+
+### Build docker image locally
+
+```
+docker build . -t nodepulse
+```
