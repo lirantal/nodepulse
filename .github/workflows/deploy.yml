@@ -22,9 +22,9 @@ on:
 env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
   RUN_REGION: us-central1
-  SERVICE_NAME: ${{ CLOUD_RUN_SERVICE_NAME }}
-  DOCKER_ORG: ${{ DOCKER_ORG }}
-  DOCKER_REPO: ${{ DOCKER_REPO }}
+  SERVICE_NAME: ${{ secrets.CLOUD_RUN_SERVICE_NAME }}
+  DOCKER_ORG: ${{ secrets.DOCKER_ORG }}
+  DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
 
 jobs:
   setup-build-deploy:
