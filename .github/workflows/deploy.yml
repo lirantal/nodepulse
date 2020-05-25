@@ -23,8 +23,6 @@ env:
   PROJECT_ID: ${{ secrets.RUN_PROJECT }}
   RUN_REGION: us-central1
   SERVICE_NAME: ${{ secrets.CLOUD_RUN_SERVICE_NAME }}
-  DOCKER_ORG: ${{ secrets.DOCKER_ORG }}
-  DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
 
 jobs:
   setup-build-deploy:
@@ -43,13 +41,11 @@ jobs:
           project_id: ${{ secrets.RUN_PROJECT }}
 
       # Build and push image to Google Container Registry
-      # But we can skip it here since we have a docker.yml
-      # that builds and pushes it to Docker Hub
-      # - name: Build
-      #   run: |-
-      #     gcloud builds submit \
-      #       --quiet \
-      #       --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+      - name: Build
+        run: |-
+          gcloud builds submit \
+            --quiet \
+            --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
 
       # Deploy image to Cloud Run
       - name: Deploy
@@ -57,6 +53,6 @@ jobs:
           gcloud run deploy "$SERVICE_NAME" \
             --quiet \
             --region "$RUN_REGION" \
-            --image "docker.io/$DOCKER_ORG/$DOCKER_REPO:latest" \
+            --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
             --platform "managed" \
             --allow-unauthenticated
