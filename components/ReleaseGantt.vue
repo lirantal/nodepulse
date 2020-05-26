@@ -12,12 +12,10 @@
       </content-placeholders>
     </template>
     <template v-else>
-      <ClientOnly>
-        <highcharts
-          :constructor-type="'ganttChart'"
-          :options="chartOptions"
-        ></highcharts>
-      </ClientOnly>
+      <highcharts
+        :constructor-type="'ganttChart'"
+        :options="chartOptions"
+      ></highcharts>
     </template>
   </div>
 </template>

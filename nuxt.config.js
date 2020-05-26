@@ -7,6 +7,9 @@ export default {
     host: '0.0.0.0',
     timing: false
   },
+  http: {
+    port: process.env.PORT || 8080
+  },
   debug: true,
   mode: 'universal',
   serverMiddleware: [
@@ -48,7 +51,7 @@ export default {
    */
   plugins: [
     '@/plugins/vue-placeholders.js',
-    { src: '@/plugins/vue-hightcharts.js', ssr: false }
+    { src: '@/plugins/vue-hightcharts.js', ssr: true }
   ],
   /*
    ** Nuxt.js dev-modules
