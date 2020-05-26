@@ -8,7 +8,8 @@ export default {
     timing: false
   },
   http: {
-    port: process.env.PORT || 8080
+    port: process.env.PORT || 8080,
+    browserBaseURL: '/'
   },
   debug: true,
   mode: 'universal',
