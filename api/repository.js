@@ -1,16 +1,18 @@
 import { graphql } from '@octokit/graphql'
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
+import { getGitHubToken } from '../utils/GitHubToken'
 
 export default async function(req, res, next) {
   let data
   try {
     data = await getRepositoryInfo()
   } catch (error) {
+    console.error(error)
     res.writeHead(500)
     res.end()
   }
 
   if (!data) {
+    console.error(data)
     res.writeHead(500)
     res.end()
   }
@@ -25,6 +27,8 @@ export default async function(req, res, next) {
 }
 
 async function getRepositoryInfo() {
+  const GITHUB_TOKEN = await getGitHubToken()
+
   const graphqlWithAuth = graphql.defaults({
     headers: {
       authorization: `token ${GITHUB_TOKEN}`
