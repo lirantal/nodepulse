@@ -80,7 +80,7 @@ export default {
   data: () => {
     return {
       usersContributedPRs: [],
-      label: 'Recent contributors'
+      label: 'Recent contributions'
     }
   },
   fetchOnServer: false
