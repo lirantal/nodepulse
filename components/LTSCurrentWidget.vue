@@ -18,7 +18,7 @@
           <div class="columns">
             <div class="column is-three-quarters">
               <div class="media-content">
-                <p class="title is-3">{{ days }}</p>
+                <p ref="DaysToDrop" class="title is-3">0</p>
                 <p class="subtitle is-6">
                   Days for existing LTS to drop support
                 </p>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { CountUp } from 'countup.js'
+
 export default {
   name: 'LTSCurrentWidget',
   async fetch() {
@@ -46,6 +48,22 @@ export default {
     return {
       days: 0
     }
+  },
+  methods: {
+    animateNumbers(element, endValue) {
+      const countUp = new CountUp(element, endValue)
+      if (!countUp.error) {
+        countUp.start()
+      }
+    }
+  },
+  created() {
+    this.$nextTick(function() {
+      this.animateNumbers(this.$refs.DaysToDrop, this.days)
+    })
+  },
+  updated() {
+    this.animateNumbers(this.$refs.DaysToDrop, this.days)
   }
 }
 </script>
