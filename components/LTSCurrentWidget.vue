@@ -49,14 +49,6 @@ export default {
       days: 0
     }
   },
-  methods: {
-    animateNumbers(element, endValue) {
-      const countUp = new CountUp(element, endValue)
-      if (!countUp.error) {
-        countUp.start()
-      }
-    }
-  },
   created() {
     this.$nextTick(function() {
       this.animateNumbers(this.$refs.DaysToDrop, this.days)
@@ -64,6 +56,14 @@ export default {
   },
   updated() {
     this.animateNumbers(this.$refs.DaysToDrop, this.days)
+  },
+  methods: {
+    animateNumbers(element, endValue) {
+      const countUp = new CountUp(element, endValue)
+      if (!countUp.error) {
+        countUp.start()
+      }
+    }
   }
 }
 </script>

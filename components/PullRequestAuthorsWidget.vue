@@ -38,7 +38,7 @@
             <div class="tile">
               <div
                 v-for="user in usersContributedPRs.slice(0, 6)"
-                :key="user.author.login"
+                :key="user.url"
                 class="tile"
               >
                 <p class="image is-32x32">
@@ -52,7 +52,7 @@
               <div class="tile">
                 <div
                   v-for="user in usersContributedPRs.slice(6, 12)"
-                  :key="user.author.login"
+                  :key="user.url"
                   class="tile"
                 >
                   <p class="image is-32x32">
