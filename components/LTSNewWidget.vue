@@ -20,7 +20,9 @@
               <div class="media-content">
                 <p ref="daysToActive" class="title is-3">0</p>
                 <p class="subtitle is-6">
-                  Days for new LTS to go Active
+                  Days for
+                  <span class="has-text-primary">Node.js {{ newVersion }}</span>
+                  to become the new LTS Active version
                 </p>
               </div>
             </div>
@@ -43,10 +45,12 @@ export default {
   async fetch() {
     const releasesData = await this.$http.$get('/api/releases')
     this.days = releasesData.newLTS.daysRemainingToStartActive
+    this.newVersion = releasesData.newLTS.version.substring(1)
   },
   data: () => {
     return {
-      days: 0
+      days: 0,
+      newVersion: ''
     }
   },
   created() {

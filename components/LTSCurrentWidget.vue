@@ -20,7 +20,11 @@
               <div class="media-content">
                 <p ref="DaysToDrop" class="title is-3">0</p>
                 <p class="subtitle is-6">
-                  Days for existing LTS to drop support
+                  Days for
+                  <span class="has-text-danger"
+                    >Node.js {{ existingVersion }}</span
+                  >
+                  to completely drop support ⚠️
                 </p>
               </div>
             </div>
@@ -43,10 +47,12 @@ export default {
   async fetch() {
     const releasesData = await this.$http.$get('/api/releases')
     this.days = releasesData.currentLTS.daysRemainingToEOL
+    this.existingVersion = releasesData.currentLTS.version.substring(1)
   },
   data: () => {
     return {
-      days: 0
+      days: 0,
+      existingVersion: ''
     }
   },
   created() {
