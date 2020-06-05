@@ -254,3 +254,63 @@ gcloud run deploy nodepulse-ssr \
           --platform "managed" \
           --allow-unauthenticated
 ```
+
+### Connect to Firebase Hosting
+
+We can connect the Cloud Run service to Firebase Hostin, which will allow
+us to use the capability of short URLs, such as:
+
+```
+https://nodepulse.web.app
+```
+
+At this point, that's the only reason to connect Firebase Hosting capabilities
+into the current GCP project.
+
+In the root directory, run:
+
+```sh
+firebase init
+```
+
+In the interactive CLI choose:
+
+1. Hosting project
+2. Use existing project, and select `nodepulse`
+3. Confirm the `public/` directory for resources
+
+The CLI will scaffold default index files in the `public/` directory
+which we need to remove. We have to remove them because if these files
+exist then the rewrite rules won't affect the top-level domain request
+such as hits to `nodepulse.web.app`.
+
+```sh
+rm public/*
+```
+
+Then update `firebase.json` to include the rewrite rules to forward
+all requests to files not found to the Cloud Run Service:
+
+```json
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "nodepulse-ssr",
+          "region": "us-central1"
+        }
+      }
+    ]
+  }
+}
+```
+
+And deploy it:
+
+```sh
+firebase deploy
+```
