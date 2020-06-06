@@ -64,7 +64,7 @@
       </aside>
 
       <div class="container column is-10">
-        <nuxt />
+        <nuxt keep-alive />
       </div>
     </section>
     <footer class="footer">
