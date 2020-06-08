@@ -44,8 +44,8 @@ export default {
   name: 'LTSNewWidget',
   async fetch() {
     const releasesData = await this.$http.$get('/api/releases')
-    this.days = releasesData.newLTS.daysRemainingToStartActive
-    this.newVersion = releasesData.newLTS.version.substring(1)
+    this.days = releasesData.current.daysRemainingToStartActive
+    this.newVersion = releasesData.current.version.substring(1)
   },
   data: () => {
     return {
