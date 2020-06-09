@@ -36,7 +36,6 @@ export default {
       },
       yAxis: {
         uniqueNames: true
-        // categories
       },
       navigator: {
         enabled: true,

@@ -84,6 +84,7 @@ function getExistingLTS(scheduleJSON) {
       const currentTime = new Date().getTime()
       const releaseEndTime = new Date(release.end).getTime()
       if (currentTime < releaseEndTime) {
+        existingLTS.startDate = new Date(release.start).getTime()
         existingLTS.endDate = releaseEndTime
         existingLTS.daysRemainingToEOL = differenceInDays(
           new Date(existingLTS.endDate),
@@ -100,10 +101,16 @@ function getExistingLTS(scheduleJSON) {
 function getActiveLTS(scheduleJSON) {
   const versions = []
 
-  for (const release of Object.values(scheduleJSON)) {
+  for (const [key, release] of Object.entries(scheduleJSON)) {
+    const releaseVersion = key
+
     const currentTime = new Date().getTime()
     const releaseStartLTS = new Date(release.lts).getTime()
     const releaseStartMaintenance = new Date(release.maintenance).getTime()
+
+    release.version = releaseVersion
+    release.startDate = releaseStartLTS
+    release.endDate = new Date(release.end).getTime()
 
     if (
       currentTime >= releaseStartLTS &&
@@ -151,6 +158,7 @@ function getCurrent(scheduleJSON) {
 
     if (release.lts) {
       current.startDate = new Date(release.start).getTime()
+      current.endDate = new Date(release.end).getTime()
       current.startActiveDate = new Date(release.lts).getTime()
       current.daysRemainingToStartActive = differenceInDays(
         current.startActiveDate,
