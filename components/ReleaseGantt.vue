@@ -56,9 +56,11 @@ export default {
         enabled: true
       },
       rangeSelector: {
-        // @TODO update the buttons to include an option that is
-        // scoped only for supported versions
         buttons: [
+          {
+            type: 'all',
+            text: 'All'
+          },
           {
             type: 'month',
             count: 1,
@@ -82,22 +84,6 @@ export default {
             type: 'year',
             count: 1,
             text: '1y'
-          },
-          {
-            type: 'all',
-            text: 'All'
-          },
-          {
-            type: 'all',
-            text: 'LTS',
-            events: {
-              click: () => {
-                // console.log(e);
-                // console.log(this)
-                this.$emit('somethingHappened', 'someData')
-                return false
-              }
-            }
           }
         ],
         enabled: true,
@@ -106,13 +92,6 @@ export default {
       plotOptions: {
         series: {
           animation: true,
-          // dragDrop: {
-          //   draggableX: true,
-          //   draggableY: true,
-          //   dragMinY: 0,
-          //   dragMaxY: 2,
-          //   dragPrecisionX: 86400 / 3 // Snap to eight hours
-          // },
           dataLabels: {
             enabled: true,
             format: '{point.phase}',
@@ -122,13 +101,6 @@ export default {
             }
           },
           allowPointSelect: true
-          // point: {
-          //   events: {
-          //     select: () => {},
-          //     unselect: () => {},
-          //     remove: () => {}
-          //   }
-          // }
         }
       },
       series: [
