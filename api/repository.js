@@ -1,18 +1,21 @@
+import pino from 'pino'
 import { graphql } from '@octokit/graphql'
 import { getGitHubToken } from '../utils/GitHubToken'
+
+const logger = pino()
 
 export default async function(req, res, next) {
   let data
   try {
     data = await getRepositoryInfo()
   } catch (error) {
-    console.error(error)
+    logger.error(error)
     res.writeHead(500)
     res.end()
   }
 
   if (!data) {
-    console.error(data)
+    logger.error(data)
     res.writeHead(500)
     res.end()
   }

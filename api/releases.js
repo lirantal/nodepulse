@@ -8,6 +8,7 @@ export default function(req, res, next) {
     res.writeHead(500)
     res.end()
   }
+
   const responsePayload = JSON.stringify(data)
   res
     .writeHead(200, {
