@@ -66,8 +66,12 @@ export default {
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     'nuxt-fontawesome',
-    '@nuxt/http'
+    '@nuxt/http',
+    '@nuxtjs/google-gtag'
   ],
+  'google-gtag': {
+    id: 'UA-172487856-1'
+  },
   /*
    ** Build configuration
    */
