@@ -314,3 +314,7 @@ And deploy it:
 ```sh
 firebase deploy
 ```
+
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
